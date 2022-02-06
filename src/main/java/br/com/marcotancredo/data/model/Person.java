@@ -1,4 +1,4 @@
-package br.com.marcotancredo.model;
+package br.com.marcotancredo.data.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,6 +26,8 @@ public class Person implements Serializable {
     @Column(nullable = false, length = 6)
     private String gender;
 
+    private Boolean enabled;
+
     public Person() {
     }
 
@@ -33,36 +35,48 @@ public class Person implements Serializable {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getFirstName() {
         return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getGender() {
-        return gender;
     }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
@@ -74,11 +88,12 @@ public class Person implements Serializable {
                 Objects.equals(firstName, person.firstName) &&
                 Objects.equals(lastName, person.lastName) &&
                 Objects.equals(address, person.address) &&
-                Objects.equals(gender, person.gender);
+                Objects.equals(gender, person.gender) &&
+                Objects.equals(enabled, person.enabled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, gender);
+        return Objects.hash(id, firstName, lastName, address, gender, enabled);
     }
 }

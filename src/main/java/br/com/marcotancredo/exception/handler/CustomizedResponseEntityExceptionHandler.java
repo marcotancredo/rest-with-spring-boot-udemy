@@ -1,7 +1,8 @@
 package br.com.marcotancredo.exception.handler;
 
 import br.com.marcotancredo.exception.ExceptionReponse;
-import br.com.marcotancredo.exception.ResourceNotFounException;
+import br.com.marcotancredo.exception.InvalidJwtAuthenticationException;
+import br.com.marcotancredo.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,8 +26,17 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(exceptionReponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(ResourceNotFounException.class)
+    @ExceptionHandler(ResourceNotFoundException.class)
     public final ResponseEntity<ExceptionReponse> handleBadRequestExceptions(Exception ex, WebRequest request) {
+        ExceptionReponse exceptionReponse = new ExceptionReponse(new Date(),
+                ex.getMessage(),
+                request.getDescription(false));
+
+        return new ResponseEntity<>(exceptionReponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidJwtAuthenticationException.class)
+    public final ResponseEntity<ExceptionReponse> invalidJwtAuthenticationException(Exception ex, WebRequest request) {
         ExceptionReponse exceptionReponse = new ExceptionReponse(new Date(),
                 ex.getMessage(),
                 request.getDescription(false));
