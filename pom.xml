@@ -82,14 +82,14 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>3.0.0</version>
+            <version>2.9.2</version>
         </dependency>
 
         <!--for Swagger UI support-->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>3.0.0</version>
+            <version>2.9.2</version>
         </dependency>
 
         <!--for Security support-->
@@ -130,9 +130,12 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <configuration>
-                    <url>jdbc:mysql://localhost:3306/rest_with_spring_boot_udemy?serverTimezone=UTC&amp;useTimezone=true&amp;useSSL=false</url>
+                    <url>jdbc:mysql://db:3306/</url>
                     <user>root</user>
-                    <password>admin123</password>
+                    <password>docker</password>
+                    <schemas>
+                        <schema>rest_with_spring_boot_udemy</schema>
+                    </schemas>
                 </configuration>
                 <dependencies>
                     <dependency>
